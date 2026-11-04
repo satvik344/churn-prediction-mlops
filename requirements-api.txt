@@ -1,0 +1,21 @@
+# API
+fastapi
+uvicorn
+pydantic
+
+# ML pipeline and data processing
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+
+# Data validation and configuration
+pandera
+PyYAML
+
+# Experiment tracking
+mlflow
+
+# Notebook support (if pipeline scripts use notebooks)
+nbformat
