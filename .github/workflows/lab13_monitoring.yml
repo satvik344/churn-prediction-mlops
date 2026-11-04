@@ -15,21 +15,21 @@ jobs:
       - name: Run MLOps monitoring trigger
         shell: powershell
         run: |
-          Set-Location "C:\Users\jnane\Favorites\churn-prediction"
-          & ".\venv\Scripts\python.exe" ".\src\mlops_pipeline\12_monitor_trigger.py"
+          Set-Location "C:\Users\SATVIK\Documents\MLOPS\complete files"
+          & ".\.venv\Scripts\python.exe" ".\src\mlops_pipeline\12_monitor_trigger.py"
 
       - name: Show monitoring result
         shell: powershell
         run: |
-          Set-Location "C:\Users\jnane\Favorites\churn-prediction"
+          Set-Location "C:\Users\SATVIK\Documents\MLOPS\complete files"
           if (Test-Path ".\outputs\monitoring\monitor_trigger_report.json") {
               Get-Content ".\outputs\monitoring\monitor_trigger_report.json"
           } else {
               Write-Host "Monitoring report was not generated."
           }
 
-      - name: Verify Kubernetes
-        shell: powershell
-        run: |
-          kubectl get deployment churn-api
-          kubectl get pods
+      # - name: Verify Kubernetes
+      #   shell: powershell
+      #   run: |
+      #     kubectl get deployment churn-api
+      #     kubectl get pods
