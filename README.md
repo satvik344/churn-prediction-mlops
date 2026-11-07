@@ -2,7 +2,7 @@
 
 An end-to-end Machine Learning Operations (MLOps) project for predicting customer churn and demonstrating how an ML model can be validated, trained, tracked, quality-gated, versioned, monitored, and selectively deployed.
 
-**GitHub repository:** [jnaneswar077/churn-prediction-mlops](https://github.com/jnaneswar077/churn-prediction-mlops)  
+**GitHub repository:** [satvik344/churn-prediction-mlops](https://github.com/satvik344/churn-prediction-mlops)  
 **Primary branch:** `main`  
 **Project status:** Labs 1–13 integrated. The core monitoring-to-retraining workflow has been executed successfully through GitHub Actions on a self-hosted Windows runner. Scheduled execution is configured; the runner currently uses interactive mode, so the machine and runner process must remain available.
 
@@ -299,6 +299,10 @@ python -m pip install -r requirements-api.txt
 
 Ensure `config.yaml`, the raw dataset, the required processed split artifacts, and the expected MLflow tracking store are present before executing the corresponding pipeline stage. Do not publish credentials or a private MLflow database in the README or repository.
 
+### Model artifact availability
+
+The current repository does not contain `models/churn_full_pipeline.pkl` or `models/churn_model.pkl`; the reconstruction manifest records that these files were absent from the supplied archive. The current deployment path instead uses `src/mlops_pipeline/11_prepare_deployment.py` to load the Production model and matching preprocessor from MLflow and write the serving bundle under `deployment/`. The API loader reads that deployment bundle. Configure the MLflow tracking store and Production model before preparing artifacts for serving.
+
 ## Running the System
 
 Run commands from the repository root while the intended virtual environment is active.
@@ -359,13 +363,11 @@ Keep this terminal open while waiting for jobs. Scheduled runs require the PC to
 
 ### Environment-specific path
 
-The current workflow uses this project path:
+The workflow uses a self-hosted Windows runner and changes to a local project checkout before running Python. The workflow currently contains absolute checkout paths in both PowerShell steps. Update both `Set-Location` entries in `.github/workflows/lab13_monitoring.yml` to match the checkout on the runner machine before using this workflow in another environment.
 
-```text
-C:\Users\jnane\Favorites\churn-prediction
-```
+Example placeholder (not a configured path): `C:\path\to\churn-prediction-mlops`.
 
-If the project is moved to another directory or run by another Windows user, update the workflow path accordingly. The local project and its virtual environment are prerequisites for this self-hosted workflow; this workflow is not a portable GitHub-hosted Linux job.
+This is a machine-specific self-hosted workflow, not a portable GitHub-hosted Linux job.
 
 ### Triggering a manual run
 
